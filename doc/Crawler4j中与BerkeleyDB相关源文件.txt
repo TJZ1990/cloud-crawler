@@ -1,0 +1,22 @@
+
+1> 用到以"com.sleepycat.je"开头的包的源文件：
+src\main\java\edu\uci\ics\crawler4j\crawler\
+	CrawlController
+
+src\main\java\edu\uci\ics\crawler4j\frontier\
+	Counters
+	DocIDServer
+	Frontier
+	InProcessPagesDB
+	WorkQueues
+
+
+2> 用到以"com.sleepycat.bind"开头的包的源文件：
+src\main\java\edu\uci\ics\crawler4j\frontier\
+	WebURLTupleBinding
+
+
+3> 用到以"com.sleepycat.persist"开头的包的源文件：
+src\main\java\edu\uci\ics\crawler4j\url\
+	WebURL
+
