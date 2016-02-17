@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package cloudwalk.crawler;
+package cloudwalk.slave.crawler;
 
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.exceptions.ContentFetchException;

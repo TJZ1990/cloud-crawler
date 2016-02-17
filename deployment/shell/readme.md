@@ -1,0 +1,1 @@
+该目录存放master/slave节点上的linux启动脚本

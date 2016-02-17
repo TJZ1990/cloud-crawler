@@ -1,7 +1,8 @@
+package cloudwalk.salve.test;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import cloudwalk.crawler.WebCrawler;
+import cloudwalk.slave.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;

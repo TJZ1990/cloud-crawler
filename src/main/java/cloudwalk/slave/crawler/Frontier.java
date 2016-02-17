@@ -1,5 +1,5 @@
 
-package cloudwalk.crawler;
+package cloudwalk.slave.crawler;
 
 import redis.clients.jedis.Jedis;
 import edu.uci.ics.crawler4j.crawler.Configurable;

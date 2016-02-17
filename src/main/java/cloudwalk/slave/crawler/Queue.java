@@ -1,4 +1,4 @@
-package cloudwalk.crawler;
+package cloudwalk.slave.crawler;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
