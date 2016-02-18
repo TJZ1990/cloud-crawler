@@ -1,5 +1,8 @@
 package cloudwalk.master.server.comm;
 
+import cloudwalk.master.server.entity.DataEntity;
+import cloudwalk.master.server.processor.DataProcessor;
+import cloudwalk.master.server.processor.EntityProcessor;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
@@ -22,8 +25,10 @@ public class SimpleHttpServerHandler implements HttpHandler {
         String string;
         while ((string = reader.readLine()) != null) {
             LOGGER.info("Request from client: " + string);
+            DataEntity dataEntity = DataProcessor.process(string);
+            EntityProcessor.process(dataEntity);
         }
-        String responseMsg = "received";
+        String responseMsg = "received\n";
         httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, responseMsg.getBytes().length);
         OutputStream out = httpExchange.getResponseBody();
         out.write(responseMsg.getBytes());

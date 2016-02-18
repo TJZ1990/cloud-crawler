@@ -28,10 +28,6 @@ public final class SimpleHttpServer {
         this.port = port;
     }
 
-    public static void main(String[] args) {
-        new SimpleHttpServer().init().start();
-    }
-
     public SimpleHttpServer init() {
         httpServerProvider = HttpServerProvider.provider();
         inetSocketAddress = new InetSocketAddress(port);
