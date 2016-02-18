@@ -27,7 +27,8 @@ public class MyCrawler extends WebCrawler {
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
-        return true;
+        return href.startsWith("http://bbs.hupu.com/");
+//        return false;
     }
 
     /**
