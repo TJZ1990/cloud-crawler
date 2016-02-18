@@ -189,6 +189,8 @@ public class WebCrawler implements Runnable {
      *
      * @param urlStr
      *            - The URL which it's content is bigger than allowed size
+     * @param pageSize
+     * no description
      */
     protected void onPageBiggerThanMaxSize(String urlStr, long pageSize) {
         logger.warn(
@@ -426,7 +428,10 @@ public class WebCrawler implements Runnable {
                     }
 
                 }
+                logger.trace("frotier has {} tasks", frontier.getQueueLength());
+                logger.trace("schedule {} new links", toSchedule.size());
                 frontier.scheduleAll(toSchedule);
+                logger.trace("frotier now has {} tasks", frontier.getQueueLength());
 
                 visit(page);
             }
@@ -462,6 +467,7 @@ public class WebCrawler implements Runnable {
     }
 
     public boolean isNotWaitingForNewURLs() {
+        logger.info("crawler is waiting: {}", isWaitingForNewURLs);
         return !isWaitingForNewURLs;
     }
 }
