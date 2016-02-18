@@ -68,7 +68,7 @@ public class CrawlController extends Configurable {
 
   protected PageFetcher pageFetcher;
   protected RobotstxtServer robotstxtServer;
-  protected Frontier frontier;
+  protected Scheduler scheduler;
   
   protected Jedis server;
 
@@ -79,8 +79,8 @@ public class CrawlController extends Configurable {
 
     config.validate();
 
-    server = new Jedis("139.129.48.184");
-    frontier = new Frontier(server, "queue_test", "dupefilter_test", config);
+    server = new Jedis("localhost");
+    scheduler = new Scheduler(server, "queue_test", "dupefilter_test", config);
     this.pageFetcher = pageFetcher;
     this.robotstxtServer = robotstxtServer;
 
@@ -179,13 +179,13 @@ public class CrawlController extends Configurable {
                   }
                   if (!someoneIsWorking) {
                     if (!shuttingDown) {
-                      long queueLength = frontier.getQueueLength();
+                      long queueLength = scheduler.getQueueLength();
                       if (queueLength > 0) {
                         continue;
                       }
                       logger.info("No thread is working and no more URLs are in queue waiting for another 10 seconds to make sure...");
                       sleep(10);
-                      queueLength = frontier.getQueueLength();
+                      queueLength = scheduler.getQueueLength();
                       if (queueLength > 0) {
                         continue;
                       }
@@ -193,7 +193,7 @@ public class CrawlController extends Configurable {
 
                     logger.info("All of the crawlers are stopped. Finishing the process...");
                     // At this step, frontier notifies the threads that were waiting for new URLs and they should stop
-                    frontier.finish();
+                    scheduler.finish();
                     for (T crawler : crawlers) {
                       crawler.onBeforeExit();
                       crawlersLocalData.add(crawler.getMyLocalData());
@@ -202,12 +202,12 @@ public class CrawlController extends Configurable {
                     logger.info("Waiting for 10 seconds before final clean up...");
                     sleep(10);
 
-                    frontier.close();
+                    scheduler.close();
                     pageFetcher.shutDown();
 
                     finished = true;
                     waitingLock.notifyAll();
-
+                    
                     return;
                   }
                 }
@@ -286,7 +286,7 @@ public class CrawlController extends Configurable {
     if (!robotstxtServer.allows(webUrl)) {
         logger.warn("Robots.txt does not allow this seed: {}", pageUrl); // using the WARN level here, as the user specifically asked to add this seed
     } else {
-        frontier.schedule(webUrl);
+        scheduler.schedule(webUrl);
     }
   }
  
@@ -306,12 +306,12 @@ public class CrawlController extends Configurable {
     this.robotstxtServer = robotstxtServer;
   }
 
-  public Frontier getFrontier() {
-    return frontier;
+  public Scheduler getScheduler() {
+    return scheduler;
   }
 
-  public void setFrontier(Frontier frontier) {
-    this.frontier = frontier;
+  public void setScheduler(Scheduler scheduler) {
+    this.scheduler = scheduler;
   }
 
   public Object getCustomData() {
@@ -339,7 +339,6 @@ public class CrawlController extends Configurable {
     logger.info("Shutting down...");
     this.shuttingDown = true;
     getPageFetcher().shutDown();
-    frontier.finish();
-    server.close();
+    scheduler.finish();
   }
 }
