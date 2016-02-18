@@ -189,6 +189,8 @@ public class WebCrawler implements Runnable {
      *
      * @param urlStr
      *            - The URL which it's content is bigger than allowed size
+     * @param pageSize
+     * no description
      */
     protected void onPageBiggerThanMaxSize(String urlStr, long pageSize) {
         logger.warn(
