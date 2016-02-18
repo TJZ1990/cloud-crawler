@@ -32,11 +32,17 @@ public final class Communicator {
         suffix = "post";
     }
 
-    public static void send(String uri) {
-        send(uri, null);
+    public static void register(String slaveIp, int slavePort, String slaveName) {
+        String destination = protocol + "://" + address + ":" + port + "/register/";
+        String param = "ip=" + slaveIp + "&port=" + slavePort + "&name=" + slaveName;
+        sendPost(destination, param);
     }
 
-    public static void send(String uri, String description) {
+    public static void sendMessage(String uri) {
+        sendMessage(uri, null);
+    }
+
+    public static void sendMessage(String uri, String description) {
         LOGGER.info("To send a URI information into master: " + uri + " (" + description + ")");
         String destination = protocol + "://" + address + ":" + port + "/" + suffix + "/";
         String param = "uri=" + uri + "&description=" + description;

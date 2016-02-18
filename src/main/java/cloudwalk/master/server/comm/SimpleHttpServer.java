@@ -46,6 +46,7 @@ public final class SimpleHttpServer {
             return null;
         }
         httpServer.createContext("/post/", new SimpleHttpServerHandler());
+        httpServer.createContext("/register/", new RegisterHandler());
         httpServer.setExecutor(null);
         httpServer.start();
         LOGGER.info("Simple HTTP server started");

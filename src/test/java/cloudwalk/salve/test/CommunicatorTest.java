@@ -10,6 +10,6 @@ import org.junit.Test;
 public class CommunicatorTest {
     @Test
     public void testSend() {
-        Communicator.send("www.baidu.com");
+        Communicator.sendMessage("www.baidu.com");
     }
 }
