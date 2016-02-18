@@ -13,14 +13,14 @@ import java.net.HttpURLConnection;
 
 /**
  * Created by 1333907 on 2/18/16.
- * Handler for SimpleHttpServer.
+ * Handler for slave register.
  */
-public class SimpleHttpServerHandler implements HttpHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleHttpServerHandler.class);
+public class RegisterHandler implements HttpHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterHandler.class);
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        LOGGER.info("Get request from " + httpExchange.getRemoteAddress().toString());
+        LOGGER.info("Get request from " + httpExchange.getRemoteAddress());
         InputStream inputStream = httpExchange.getRequestBody();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
         String string;
