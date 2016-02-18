@@ -1,4 +1,4 @@
-package cloudwalk.salve.unitTest;
+package cloudwalk.salve.test;
 
 import static org.junit.Assert.*;
 
