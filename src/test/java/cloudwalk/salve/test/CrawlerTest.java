@@ -14,7 +14,7 @@ public class CrawlerTest {
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
-        config.setMaxPagesToFetch(1);
+        config.setMaxPagesToFetch(3);
 
         /*
          * Instantiate the controller for this crawl.
@@ -23,7 +23,7 @@ public class CrawlerTest {
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-
+        controller.getScheduler().clear();
         /*
          * For each crawl, you need to add some seed urls. These are the first
          * URLs that are fetched and then the crawler starts following links
