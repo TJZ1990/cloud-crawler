@@ -1,6 +1,6 @@
 package cloudwalk.master.server.processor;
 
-import cloudwalk.master.server.comm.SlaveManager;
+import cloudwalk.master.server.SlaveManager;
 import cloudwalk.master.server.entity.SlaveNameEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
