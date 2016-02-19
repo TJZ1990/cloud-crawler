@@ -77,7 +77,7 @@
                     <goal>single</goal>
                   </goals>
                   <configuration>
-                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <finalName>${project.artifactId}</finalName>
                   </configuration>
                 </execution>
               </executions>
@@ -98,4 +98,5 @@
     </dependency>
   </dependencies>
   
+  <name>cloud-crawler</name>
 </project>
