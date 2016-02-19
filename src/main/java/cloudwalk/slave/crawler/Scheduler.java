@@ -16,7 +16,7 @@ public class Scheduler extends Configurable {
 
   protected static final Logger logger = LoggerFactory.getLogger(Scheduler.class);
 
-  private Queue queue;
+  private PriorityQueue queue;
   private Dupefilter dupefilter;
   private Counter counter;
   private Jedis server;
@@ -27,15 +27,9 @@ public class Scheduler extends Configurable {
   public Scheduler(Jedis server, String queueKey, String dupefilterKey, CrawlConfig config) {
     super(config);
     this.server = server;
-    this.queue = new Queue(server, queueKey);
+    this.queue = new PriorityQueue(server, queueKey);
     this.dupefilter = new Dupefilter(server, dupefilterKey);
     this.counter = new Counter(server);
-    if (!config.isResumableCrawling()) {
-        queue.clear();
-        dupefilter.clear();
-        counter.clear();
-    }
-
   }
 
   public void scheduleAll(List<WebURL> urls) {
@@ -93,6 +87,12 @@ public class Scheduler extends Configurable {
 
   public boolean isFinished() {
     return isFinished;
+  }
+  
+  public void clear() {
+      queue.clear();
+      dupefilter.clear();
+      counter.clear();
   }
 
   public void close() {

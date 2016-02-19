@@ -1,4 +1,4 @@
-package cloudwalk.salve.test;
+package cloudwalk.salve.test.crawler;
 
 import static org.junit.Assert.*;
 
