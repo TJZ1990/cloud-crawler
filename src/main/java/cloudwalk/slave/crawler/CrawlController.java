@@ -79,7 +79,7 @@ public class CrawlController extends Configurable {
 
     config.validate();
 
-    server = new Jedis("localhost");
+    server = new Jedis("139.129.48.184");
     frontier = new Frontier(server, "queue_test", "dupefilter_test", config);
     this.pageFetcher = pageFetcher;
     this.robotstxtServer = robotstxtServer;
