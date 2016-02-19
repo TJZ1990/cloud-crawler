@@ -1,4 +1,4 @@
-package cloudwalk.master.server.comm;
+package cloudwalk.master.server;
 
 import cloudwalk.master.server.entity.SlaveInfoEntity;
 import cloudwalk.master.server.entity.SlaveNameEntity;

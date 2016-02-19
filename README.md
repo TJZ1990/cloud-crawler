@@ -33,4 +33,7 @@ These following features might be implemented if possible:
 - Create a [docker](http://www.docker.com/) image containing the environment of slave-node for fast deployment and extension.
 - Use web pages to show the current status and progress of the crawlers
 - ...(more to be added)
- 
+
+##Development Guide
+###JDK
+###Maven mvn clean install -Dmaven.test.skip=true
