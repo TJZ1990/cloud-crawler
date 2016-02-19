@@ -15,15 +15,15 @@ The graph below shows a sketch of the basic project structure, note that the str
 - The crawler on slave-nodes uses a few modules from the [crawler4j](https://github.com/yasserg/crawler4j) project on github, with its controller and database access changed in order to work as part of the distributed system. A communication module is implemented so that the crawlers can link up with the coordinator on the master-node.
 - There are FTP servers on slave-nodes so that the user may get the crawling products(the pages crawled will be processed on local slave-node, and if there are any processing results, they will be pushed to the FTP server waiting for download).
 
-## Brief deployment Guide(On Linux server)
+## Brief deployment guide(On Linux server)
 ###Normal way
-1. Install java runtime and add environment variables.
-2. (Ignore this step on slave-node) Install and configure Redis and MySQL services.
-3. Set up FTP service so that file can be transferred.
+1. Set up FTP service so that file can be transferred.
+2. Install java runtime environment and add environment variables.
+3. (Ignore this step on slave-node) Install and configure Redis and MySQL services.
 4. Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "./deployment/shell" folder) to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.
 
 
-###Using docker
+###Using docker(NOT AVAILABLE YET)
 1. Get docker image at [release](https://github.com/TJZ1990/cloud-crawler/releases) page.
 2. Deploy.
 
