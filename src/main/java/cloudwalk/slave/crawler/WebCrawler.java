@@ -91,7 +91,7 @@ public class WebCrawler implements Runnable {
     /**
      * The Frontier object that manages the crawl queue.
      */
-    private Frontier frontier;
+    private Scheduler scheduler;
 
     /**
      * Is the current crawler instance waiting for new URLs? This field is
@@ -113,7 +113,7 @@ public class WebCrawler implements Runnable {
         this.myId = id;
         this.pageFetcher = crawlController.getPageFetcher();
         this.robotstxtServer = crawlController.getRobotstxtServer();
-        this.frontier = crawlController.getFrontier();
+        this.scheduler = crawlController.getScheduler();
         this.parser = new Parser(crawlController.getConfig());
         this.myController = crawlController;
         this.isWaitingForNewURLs = false;
@@ -264,9 +264,9 @@ public class WebCrawler implements Runnable {
         while (true) {
             List<WebURL> assignedURLs = new ArrayList<>(50);
             isWaitingForNewURLs = true;
-            frontier.getNextURLs(50, assignedURLs);
+            scheduler.getNextURLs(50, assignedURLs);
             if (assignedURLs.size() == 0) {
-                if (frontier.isFinished()) {
+                if (scheduler.isFinished()) {
                     return;
                 }
                 try {
@@ -364,7 +364,7 @@ public class WebCrawler implements Runnable {
                         webURL.setAnchor(curURL.getAnchor());
                         if (shouldVisit(page, webURL)) {
                             if (robotstxtServer.allows(webURL)) {
-                                frontier.schedule(webURL);
+                                scheduler.schedule(webURL);
                             } else {
                                 logger.debug(
                                         "Not visiting: {} as per the server's \"robots.txt\" policy",
@@ -428,10 +428,10 @@ public class WebCrawler implements Runnable {
                     }
 
                 }
-                logger.trace("frotier has {} tasks", frontier.getQueueLength());
+                logger.trace("frotier has {} tasks", scheduler.getQueueLength());
                 logger.trace("schedule {} new links", toSchedule.size());
-                frontier.scheduleAll(toSchedule);
-                logger.trace("frotier now has {} tasks", frontier.getQueueLength());
+                scheduler.scheduleAll(toSchedule);
+                logger.trace("frotier now has {} tasks", scheduler.getQueueLength());
 
                 visit(page);
             }
@@ -467,7 +467,6 @@ public class WebCrawler implements Runnable {
     }
 
     public boolean isNotWaitingForNewURLs() {
-        logger.info("crawler is waiting: {}", isWaitingForNewURLs);
         return !isWaitingForNewURLs;
     }
 }

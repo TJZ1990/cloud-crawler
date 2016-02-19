@@ -15,11 +15,12 @@ import java.net.HttpURLConnection;
  * Created by 1333907 on 2/18/16.
  * Handler for SimpleHttpServer.
  */
-public class SimpleHttpServerHandler implements HttpHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleHttpServerHandler.class);
+public class MessageHandler implements HttpHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageHandler.class);
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+        LOGGER.info("Get request from " + httpExchange.getRemoteAddress().toString());
         InputStream inputStream = httpExchange.getRequestBody();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
         String string;

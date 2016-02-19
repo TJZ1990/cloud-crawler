@@ -12,30 +12,33 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-public class Frontier extends Configurable {
+public class Scheduler extends Configurable {
 
-  protected static final Logger logger = LoggerFactory.getLogger(Frontier.class);
+  protected static final Logger logger = LoggerFactory.getLogger(Scheduler.class);
 
-  private Queue queue;
+  private PriorityQueue queue;
   private Dupefilter dupefilter;
+  private Counter counter;
+  private Jedis server;
   protected final Object mutex = new Object();
 
   protected boolean isFinished = false;
 
-  public Frontier(Jedis server, String queueKey, String dupefilterKey, CrawlConfig config) {
+  public Scheduler(Jedis server, String queueKey, String dupefilterKey, CrawlConfig config) {
     super(config);
-    this.queue = new Queue(server, queueKey);
+    this.server = server;
+    this.queue = new PriorityQueue(server, queueKey);
     this.dupefilter = new Dupefilter(server, dupefilterKey);
-    if (!config.isResumableCrawling()) {
-        queue.clear();
-        dupefilter.clear();
-    }
-
+    this.counter = new Counter(server);
   }
 
   public void scheduleAll(List<WebURL> urls) {
     synchronized (mutex) {
       for (WebURL url : urls) {
+          if(config.getMaxPagesToFetch() > 0 && getScheduledNum() >= config.getMaxPagesToFetch()){
+              logger.info("scheduled pages exceed maximum pages to fetch");
+              return;
+          }
           schedule(url);
       }
     }
@@ -43,8 +46,13 @@ public class Frontier extends Configurable {
 
   public void schedule(WebURL url) {
     synchronized (mutex) {
+        if(config.getMaxPagesToFetch() > 0 && getScheduledNum() >= config.getMaxPagesToFetch()){
+            logger.info("scheduled pages exceed maximum pages to fetch");
+            return;
+        }
         if(!dupefilter.seenURL(url)) {
             queue.push(url);
+            counter.incr();
         }
     }
   }
@@ -52,13 +60,9 @@ public class Frontier extends Configurable {
   public void getNextURLs(int max, List<WebURL> result) {
     while (true) {
       synchronized (mutex) {
-        if (isFinished) {
-          return;
-        }
-
         int num = 0;
         WebURL url;
-        while(queue.getLength() > 0 && num < max) {
+        while(!isFinished && queue.getLength() > 0 && num < max) {
             url = queue.pop();
             result.add(url);
             num++;
@@ -68,9 +72,6 @@ public class Frontier extends Configurable {
           return;
         }
       }
-
-      //TODO：If no URL is got, block the thread.
-      
     }
   }
 
@@ -78,10 +79,20 @@ public class Frontier extends Configurable {
   public long getQueueLength() {
     return queue.getLength();
   }
+  
+  public long getScheduledNum() {
+      return counter.getNumber();
+  }
 
 
   public boolean isFinished() {
     return isFinished;
+  }
+  
+  public void clear() {
+      queue.clear();
+      dupefilter.clear();
+      counter.clear();
   }
 
   public void close() {
@@ -90,6 +101,7 @@ public class Frontier extends Configurable {
 
   public void finish() {
     isFinished = true;
-
+    server.close();
+    logger.info("close redis client");
   }
 }

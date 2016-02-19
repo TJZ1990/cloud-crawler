@@ -10,7 +10,7 @@ import java.net.InetSocketAddress;
 
 /**
  * Created by 1333907 on 2/18/16.
- * Master HTTP server starts from command line instead of container.
+ * Simple master HTTP server starts from command line instead of container.
  */
 public final class SimpleHttpServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleHttpServer.class);
@@ -45,7 +45,14 @@ public final class SimpleHttpServer {
             LOGGER.error("Cannot start simple HTTP server");
             return null;
         }
-        httpServer.createContext("/post/", new SimpleHttpServerHandler());
+        // Handler for index.html
+        httpServer.createContext("/index", new IndexHandler());
+        // Handler for static files, e.g., css, js
+        httpServer.createContext("/static", new StaticHandler());
+        // Handler for message containing uri
+        httpServer.createContext("/message", new MessageHandler());
+        // Handler for slave register
+        httpServer.createContext("/register", new RegisterHandler());
         httpServer.setExecutor(null);
         httpServer.start();
         LOGGER.info("Simple HTTP server started");
