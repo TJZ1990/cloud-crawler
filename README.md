@@ -20,7 +20,7 @@ The graph below shows a sketch of the basic project structure, note that the str
 1. Set up FTP service so that file can be transferred.
 2. Install java runtime environment and add environment variables.
 3. (Ignore this step on slave-node) Install and configure Redis and MySQL services.
-4. Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "./deployment/shell" folder) to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.
+4. Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "deployment/shell/") to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.
 
 
 ###Using docker(NOT AVAILABLE YET)
