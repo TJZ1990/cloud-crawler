@@ -32,6 +32,7 @@ public class PriorityQueue {
         tx.zrange(queueKey.getBytes(), 0, 0);
         tx.zremrangeByRank(queueKey, 0, 0);
         Set<byte[]> result = (Set<byte[]>) tx.exec().get(0);
+        if(result.size() == 0) return null;
         return unserialize(result.iterator().next());
     }
     
@@ -60,6 +61,9 @@ public class PriorityQueue {
     }
 
     public WebURL unserialize(byte[] bytes) {
+        if(bytes == null) {
+            return null;
+        }
         ByteArrayInputStream bais = null;
         try {
             bais = new ByteArrayInputStream(bytes);

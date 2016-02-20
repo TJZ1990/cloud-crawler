@@ -3,11 +3,12 @@ package cloudwalk.slave.crawler;
 import redis.clients.jedis.Jedis;
 
 public class Counter {
-    private final String counterKey = "scheduledPages";
     private Jedis server;
+    private String counterKey;
 
-    public Counter(Jedis server) {
+    public Counter(Jedis server, String counterKey) {
         this.server = server;
+        this.counterKey = counterKey;
     }
     
     public void incr() {

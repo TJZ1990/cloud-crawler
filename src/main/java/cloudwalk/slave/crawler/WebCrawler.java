@@ -262,9 +262,9 @@ public class WebCrawler implements Runnable {
     public void run() {
         onStart();
         while (true) {
-            List<WebURL> assignedURLs = new ArrayList<>(50);
+            List<WebURL> assignedURLs = new ArrayList<>(20);
             isWaitingForNewURLs = true;
-            scheduler.getNextURLs(50, assignedURLs);
+            scheduler.getNextURLs(20, assignedURLs);
             if (assignedURLs.size() == 0) {
                 if (scheduler.isFinished()) {
                     return;
