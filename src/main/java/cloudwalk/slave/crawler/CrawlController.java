@@ -73,12 +73,13 @@ public class CrawlController extends Configurable {
 
   protected final Object waitingLock = new Object();
 
-  public CrawlController(CrawlConfig config, PageFetcher pageFetcher, RobotstxtServer robotstxtServer, String ip, int port) throws Exception {
+  public CrawlController(CrawlConfig config, PageFetcher pageFetcher, RobotstxtServer robotstxtServer, String ip, int port, String pwd) throws Exception {
     super(config);
 
     config.validate();
     
     server = new Jedis(ip, port);
+    server.auth(pwd);
     scheduler = new Scheduler(server, "crawler_queue", "crawler_dupefilter", "crawler_counter", config);
     this.pageFetcher = pageFetcher;
     this.robotstxtServer = robotstxtServer;
