@@ -16,14 +16,15 @@ The graph below shows a sketch of the basic project structure, note that the str
 - There are FTP servers on slave-nodes so that the user may get the crawling products(the pages crawled will be processed on local slave-node, and if there are any processing results, they will be pushed to the FTP server waiting for download).
 
 ## Brief deployment guide(On Linux server)
-###Normal way
+### Normal way
+See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master/deployment/full-deployment-report.md).
 1. Set up FTP service so that file can be transferred.
 2. Install java runtime environment and add environment variables.
 3. (Ignore this step on slave-node) Install and configure Redis and MySQL services.
 4. Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "deployment/shell/") to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.
 
 
-###Using docker(NOT AVAILABLE YET)
+### Using docker(NOT AVAILABLE YET)
 1. Get docker image at [release](https://github.com/TJZ1990/cloud-crawler/releases) page.
 2. Deploy.
 
@@ -31,9 +32,9 @@ The graph below shows a sketch of the basic project structure, note that the str
 These following features might be implemented if possible:
 
 - Create a [docker](http://www.docker.com/) image containing the environment of slave-node for fast deployment and extension.
-- Use web pages to show the current status and progress of the crawlers
+- Use web pages to show the current status and progress of the crawlers.
 - ...(more to be added)
 
-##Development Guide
-###JDK
-###Maven mvn clean install -Dmaven.test.skip=true
+## Development Guide
+### JDK
+### Maven mvn clean install -Dmaven.test.skip=true
