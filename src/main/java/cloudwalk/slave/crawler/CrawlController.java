@@ -79,6 +79,7 @@ public class CrawlController extends Configurable {
     config.validate();
     
     server = new Jedis(ip, port);
+
     if(pwd != null && !pwd.equals("")){
         server.auth(pwd);
     }

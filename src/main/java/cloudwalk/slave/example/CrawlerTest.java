@@ -22,6 +22,7 @@ public class CrawlerTest {
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig,
                 pageFetcher);
+
         
         CrawlController controller;
         if (args.length < 3) {
@@ -34,6 +35,7 @@ public class CrawlerTest {
                     args[2]);
         }
         //controller.getScheduler().clear();
+
 
         controller.addSeed("http://bbs.hupu.com/bxj");
         for (int i = 2; i <= 10; i++) {
