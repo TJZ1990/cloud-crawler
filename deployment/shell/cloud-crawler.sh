@@ -32,6 +32,7 @@ elif [ $1 = "-s" ] || [ $1 = "--slave" ]
 then
     if [ -e "/usr/crawler/cloud-crawler-jar-with-dependencies.jar" ]
     then
+
 	if [ $# -eq 4 ]
 	then 
 	    cd /usr/crawler
@@ -43,6 +44,7 @@ then
 	    java -jar cloud-crawler-jar-with-dependencies.jar slave
 	    echo "[INFO] Slave service started. Using default setting."
 	fi  
+
     else
         echo "[ERROR] Target file not found!"
         echo "[INFO] Slave service NOT started."

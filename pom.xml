@@ -24,11 +24,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.5</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*.properties</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
 
             <!-- generate a source jar -->
@@ -69,6 +64,11 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>cloudwalk.slave.example.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
                 <executions>
                     <execution>
