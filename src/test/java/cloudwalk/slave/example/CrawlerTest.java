@@ -1,4 +1,4 @@
-package cloudwalk.salve.test;
+package cloudwalk.slave.example;
 
 
 import cloudwalk.slave.crawler.CrawlController;
@@ -10,11 +10,11 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 public class CrawlerTest {
     public static void main(String[] args) throws Exception {
         String crawlStorageFolder = "/data/crawl/root";
-        int numberOfCrawlers = 1;
+        int numberOfCrawlers = 3;
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
-        config.setMaxPagesToFetch(3);
+        config.setMaxPagesToFetch(-1);
 
         /*
          * Instantiate the controller for this crawl.
@@ -22,19 +22,20 @@ public class CrawlerTest {
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
-        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-        controller.getScheduler().clear();
-        /*
-         * For each crawl, you need to add some seed urls. These are the first
-         * URLs that are fetched and then the crawler starts following links
-         * which are found in these pages
-         */
-        controller.addSeed("http://bbs.hupu.com/bxj");
+        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer, "localhost", 6379);
+//        controller.getScheduler().clear();
 
+        
+        controller.addSeed("http://bbs.hupu.com/bxj");
+        for(int i = 2; i <= 10; i++) {
+            String url = "http://bbs.hupu.com/bxj-" + i;
+            controller.addSeed(url);
+        }
+        
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
          * will reach the line after this only when crawling is finished.
          */
-        controller.start(MyCrawler.class, numberOfCrawlers);
+        controller.start(BXJCrawler.class, numberOfCrawlers);
     }
 }

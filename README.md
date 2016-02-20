@@ -17,6 +17,7 @@ The graph below shows a sketch of the basic project structure, note that the str
 
 ## Brief deployment guide(On Linux server)
 ### Normal way
+
 See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master/deployment/full-deployment-report.md).
 - Set up FTP service so that file can be transferred.
 - Install java runtime environment and add environment variables.
@@ -30,11 +31,13 @@ See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master
 - Get docker image at [release](https://github.com/TJZ1990/cloud-crawler/releases) page.
 - Deploy.
 
+
 ## Optional objectives
 These following features might be implemented if possible:
 - Create a [docker](http://www.docker.com/) image containing the environment of slave-node for fast deployment and extension.
 - ~~Use web pages to show the current status and progress of the crawlers.~~√
 - ...(more to be added)
+
 
 ## Development Guide
 
@@ -96,3 +99,4 @@ Response:
       "slave2": 3,
       "slave3": 4
     }
+

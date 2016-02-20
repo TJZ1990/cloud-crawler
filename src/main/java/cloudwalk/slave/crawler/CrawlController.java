@@ -19,7 +19,6 @@ package cloudwalk.slave.crawler;
 
 
 import redis.clients.jedis.Jedis;
-
 import edu.uci.ics.crawler4j.crawler.Configurable;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
@@ -74,13 +73,13 @@ public class CrawlController extends Configurable {
 
   protected final Object waitingLock = new Object();
 
-  public CrawlController(CrawlConfig config, PageFetcher pageFetcher, RobotstxtServer robotstxtServer) throws Exception {
+  public CrawlController(CrawlConfig config, PageFetcher pageFetcher, RobotstxtServer robotstxtServer, String ip, int port) throws Exception {
     super(config);
 
     config.validate();
-
-    server = new Jedis("localhost");
-    scheduler = new Scheduler(server, "queue_test", "dupefilter_test", config);
+    
+    server = new Jedis(ip, port);
+    scheduler = new Scheduler(server, "crawler_queue", "crawler_dupefilter", "crawler_counter", config);
     this.pageFetcher = pageFetcher;
     this.robotstxtServer = robotstxtServer;
 

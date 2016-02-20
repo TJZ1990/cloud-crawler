@@ -52,6 +52,9 @@ public class Queue {
     }
 
     public WebURL unserialize(byte[] bytes) {
+        if(bytes == null) {
+            return null;
+        }
         ByteArrayInputStream bais = null;
         try {
             bais = new ByteArrayInputStream(bytes);
