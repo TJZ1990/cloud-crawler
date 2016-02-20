@@ -39,7 +39,7 @@
 -C指定解压到的目录  
 * 给root用户设置java环境变量  
 `$ vi /root/.profile`  
-加上以下内容  
+加入以下内容  
 ```
 JAVA_HOME=/usr/local/src/jdk1.8.0_73  
 export JAVA_HOME  
@@ -58,8 +58,8 @@ export CLASSPATH
 `$ apt-get install redis-server`  
 * 配置redis  
 `$ vi /etc/redis/redis.conf`  
-如果需要设置访问密码--启用  
-`requirepass XXX`  
+如果需要设置访问密码--将下面一行去掉注释并设置密码  
+> requirepass XXX  
 之后可用如下命令访问  
 `$ redis-cli -h IP -p PORT -a XXX`  
 
@@ -71,7 +71,7 @@ export CLASSPATH
 `$ mysql -h localhost -uroot -p密码`  
 * 配置  
 `$ vi /etc/mysql/my.cnf`  
-1. 修改字符集为utf8以支持中文--  
+->修改字符集为utf8以支持中文--  
 在[client]下追加  
 `default-character-set=utf8`  
 在[mysqld]下追加  
@@ -79,16 +79,16 @@ export CLASSPATH
 在[mysql]下追加  
 `default-character-set=utf8`  
 之后在mysql中用status查看字符集情况  
-2. 如果要允许远程用户访问MySQL--注释掉下面这行  
-`bind-address = 127.0.0.1 或 skip-networking(某些MySQL版本)`  
-3. 修改其他需要的配置后重启MySQL服务  
+->如果要允许远程用户访问MySQL--注释掉下面这行  
+> bind-address = 127.0.0.1 或 skip-networking(某些MySQL版本)  
+->修改其他需要的配置后重启MySQL服务  
 `$ service mysql restart`  
 * root登陆MySQL后可以限制各用户的访问权限(相当于修改mysql下的user表)  
 `GRANT 操作 ON 数据库.表 TO 用户名@登录主机 IDENTIFIED BY "密码";`  
 例如  
 `GRANT select,insert,update,delete ON test.* TO user@'%' IDENTIFIED BY '';`  
 `GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY '654321';`  
-最后刷新一下  
+修改后刷新一下  
 `FLUSH PRIVILEGES;`
 
 ##部署应用
