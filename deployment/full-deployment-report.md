@@ -58,8 +58,10 @@ export CLASSPATH
 `$ apt-get install redis-server`  
 * 配置redis  
 `$ vi /etc/redis/redis.conf`  
-如果需要设置访问密码--将下面一行去掉注释并设置密码  
-> requirepass XXX  
+如果需要设置访问密码--将下面一行去掉注释并设置密码
+
+> requirepass XXX
+
 之后可用如下命令访问  
 `$ redis-cli -h IP -p PORT -a XXX`  
 
@@ -79,8 +81,11 @@ export CLASSPATH
 在[mysql]下追加  
 `default-character-set=utf8`  
 之后在mysql中用status查看字符集情况  
-->如果要允许远程用户访问MySQL--注释掉下面这行  
-> bind-address = 127.0.0.1 或 skip-networking(某些MySQL版本)  
+->如果要允许远程用户访问MySQL--注释掉下面这行
+
+> bind-address = 127.0.0.1  
+> 或 skip-networking (某些MySQL版本)
+
 ->修改其他需要的配置后重启MySQL服务  
 `$ service mysql restart`  
 * root登陆MySQL后可以限制各用户的访问权限(相当于修改mysql下的user表)  
