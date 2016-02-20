@@ -428,11 +428,7 @@ public class WebCrawler implements Runnable {
                     }
 
                 }
-                logger.trace("frotier has {} tasks", scheduler.getQueueLength());
-                logger.trace("schedule {} new links", toSchedule.size());
                 scheduler.scheduleAll(toSchedule);
-                logger.trace("frotier now has {} tasks", scheduler.getQueueLength());
-
                 visit(page);
             }
         } catch (PageBiggerThanMaxSizeException e) {

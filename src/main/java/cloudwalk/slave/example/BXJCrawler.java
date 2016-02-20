@@ -31,7 +31,6 @@ public class BXJCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
-
         if (page.getParseData() instanceof HtmlParseData) {
             if (url.toLowerCase().matches(curPattern1)) {
                 HtmlParseData htmlParseData = (HtmlParseData) page

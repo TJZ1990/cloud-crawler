@@ -22,9 +22,18 @@ public class CrawlerTest {
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig,
                 pageFetcher);
-        CrawlController controller = new CrawlController(config, pageFetcher,
-                robotstxtServer, args[0], Integer.valueOf(args[1]));
-        // controller.getScheduler().clear();
+        
+        CrawlController controller;
+        if (args.length < 3) {
+            controller = new CrawlController(config,
+                    pageFetcher, robotstxtServer, "139.129.48.209", 6379,
+                    "cloud-03");
+        } else {
+            controller = new CrawlController(config,
+                    pageFetcher, robotstxtServer, args[0], Integer.valueOf(args[1]),
+                    args[2]);
+        }
+        //controller.getScheduler().clear();
 
         controller.addSeed("http://bbs.hupu.com/bxj");
         for (int i = 2; i <= 10; i++) {
