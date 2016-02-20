@@ -35,5 +35,4 @@ These following features might be implemented if possible:
 - ...(more to be added)
 
 ##Development Guide
-###JDK
-###Maven mvn clean install -Dmaven.test.skip=true
+
