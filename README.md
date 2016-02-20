@@ -42,6 +42,7 @@ These following features might be implemented if possible:
 Request: /slave.json
 
 Response:
+
     {
       "hostname": "localhost",
       "ip": "127.0.0.1",
@@ -53,6 +54,7 @@ Response:
 Request: /slaves.json
 
 Response:
+
     {
       "slave0": {
         "hostname": "localhost",
@@ -74,6 +76,7 @@ Response:
 Request: /number.json
 
 Response:
+
     {
       "slave0": 1,
       "slave1": 2
