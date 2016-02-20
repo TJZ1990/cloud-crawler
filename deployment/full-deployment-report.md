@@ -103,7 +103,11 @@ export CLASSPATH
 * 从工程目录deployment/shell/目录下找到启动脚本"cloud-crawler.sh"后上传至服务器  
 * 运行启动脚本  
 `$ chmod +x cloud-crawler.sh`  
-`$ ./cloud-crawler.sh -m 或 cloud-crawler.sh -s`  
+`$ ./cloud-crawler.sh -m 或 ./cloud-crawler.sh -s`  
 ->参数-m表示启动master服务  
 ->参数-s表示启动slave服务  
-->可以加参数--help查看具体用法  
+->可以用--help查看具体用法  
+启动salve服务时可以加上master的IP、PORT、CODE  
+`$ ./cloud-crawler.sh -s IP PORT CODE`  
+不加时使用程序内默认值
+

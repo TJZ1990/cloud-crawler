@@ -25,12 +25,11 @@ See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master
 - Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "deployment/shell/") to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.  
 `$ mv -iuv /usr/rootftp/cloud-crawler-jar-with-dependencies.jar /usr/crawler`  
 `$ chmod +x cloud-crawler.sh`  
-`$ ./cloud-crawler.sh -m 或 cloud-crawler.sh -s`  
+`$ ./cloud-crawler.sh -m 或 cloud-crawler.sh -s 或 ./cloud-crawler.sh -s IP PORT CODE`  
 
 ### Using docker(NOT AVAILABLE YET)
 - Get docker image at [release](https://github.com/TJZ1990/cloud-crawler/releases) page.
 - Deploy.
-
 
 ## Optional objectives
 These following features might be implemented if possible:
@@ -38,10 +37,8 @@ These following features might be implemented if possible:
 - ~~Use web pages to show the current status and progress of the crawlers.~~√
 - ...(more to be added)
 
-
-## Development Guide
-
-## API Guide (Request from Front-end)
+## Development guide
+### API guide (Request from Front-end)
 Request: /slave.json
 
 Response:
