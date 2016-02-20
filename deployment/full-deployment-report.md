@@ -99,11 +99,11 @@ export CLASSPATH
 ##部署应用
 * 将工程完成后的完整jar包(包含所有依赖)上传至服务器  
 * 将jar包移动到指定位置  
-`$ mv -iuv /usr/rootftp/XXX.jar /usr/crawler`  
+`$ mv -iuv /usr/rootftp/cloud-crawler-jar-with-dependencies.jar /usr/crawler`  
 * 从工程目录deployment/shell/目录下找到启动脚本"cloud-crawler.sh"后上传至服务器  
 * 运行启动脚本  
 `$ chmod +x cloud-crawler.sh`  
-`$ ./cloud-crawler -m 或 cloud-crawler -s`  
+`$ ./cloud-crawler.sh -m 或 cloud-crawler.sh -s`  
 ->参数-m表示启动master服务  
 ->参数-s表示启动slave服务  
 ->可以加参数--help查看具体用法  
