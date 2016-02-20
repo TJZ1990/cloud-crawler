@@ -34,5 +34,62 @@ These following features might be implemented if possible:
 - ...(more to be added)
 
 ## Development Guide
-### JDK
-### Maven mvn clean install -Dmaven.test.skip=true
+
+## API Guide (Request from Front-end)
+Request: /slave.json
+
+Response:
+
+    {
+      "hostname": "localhost",
+      "ip": "127.0.0.1",
+      "port": -1,
+      "name": "slave0",
+      "number": 0
+    }
+
+Request: /slaves.json
+
+Response:
+
+    {
+      "slave0": {
+        "hostname": "localhost",
+        "ip": "127.0.0.1",
+        "port": -1,
+        "name": "slave0",
+        "number": 0
+      },
+      "slave1": {
+        "hostname": "localhost",
+        "ip": "127.0.0.1",
+        "port": -1,
+        "name": "slave1",
+        "number": 0
+      },
+      "slave2": {
+        "hostname": "remote",
+        "ip": "127.0.0.1",
+        "port": -1,
+        "name": "slave0",
+        "number": 0
+      },
+      "slave3": {
+        "hostname": "remote",
+        "ip": "127.0.0.1",
+        "port": -1,
+        "name": "slave1",
+        "number": 0
+       }
+    }
+
+Request: /number.json
+
+Response:
+
+    {
+      "slave0": 1,
+      "slave1": 2,
+      "slave2": 3,
+      "slave3": 4
+    }
