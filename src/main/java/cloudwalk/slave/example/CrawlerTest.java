@@ -1,6 +1,5 @@
 package cloudwalk.slave.example;
 
-
 import cloudwalk.slave.crawler.CrawlController;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
@@ -21,17 +20,18 @@ public class CrawlerTest {
          */
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
-        RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
-        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer, "localhost", 6379);
-//        controller.getScheduler().clear();
+        RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig,
+                pageFetcher);
+        CrawlController controller = new CrawlController(config, pageFetcher,
+                robotstxtServer, args[0], Integer.valueOf(args[1]));
+        // controller.getScheduler().clear();
 
-        
         controller.addSeed("http://bbs.hupu.com/bxj");
-        for(int i = 2; i <= 10; i++) {
+        for (int i = 2; i <= 10; i++) {
             String url = "http://bbs.hupu.com/bxj-" + i;
             controller.addSeed(url);
         }
-        
+
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
          * will reach the line after this only when crawling is finished.

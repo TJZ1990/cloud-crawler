@@ -31,7 +31,7 @@ then
     if [ -e "/usr/crawler/cloud-crawler-jar-with-dependencies.jar" ]
     then
         cd /usr/crawler
-        java -jar cloud-crawler-jar-with-dependencies.jar slave
+        java -jar cloud-crawler-jar-with-dependencies.jar slave $2 $3
         echo "[INFO] Slave service started."
     else
         echo "[ERROR] Target file not found!"
