@@ -21,7 +21,7 @@ See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master
 - Set up FTP service so that file can be transferred.
 - Install java runtime environment and add environment variables.
 - (Ignore this step on slave-node) Install and configure Redis and MySQL services.
-- Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "deployment/shell/") to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.
+- Upload the project's jar file(**The program for master-node and slave-node will be packaged in one jar file**) and "cloud-crawler.sh"(under "deployment/shell/") to servers, execute "cloud-crawler.sh" with **different arguments** in Linux shell to start each service.  
 `$ mv -iuv /usr/rootftp/cloud-crawler-jar-with-dependencies.jar /usr/crawler`  
 `$ chmod +x cloud-crawler.sh`  
 `$ ./cloud-crawler.sh -m 或 cloud-crawler.sh -s`  
