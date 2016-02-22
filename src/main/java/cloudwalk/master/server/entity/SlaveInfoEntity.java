@@ -5,4 +5,5 @@ package cloudwalk.master.server.entity;
  */
 
 public class SlaveInfoEntity {
+	
 }

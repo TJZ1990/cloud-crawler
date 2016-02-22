@@ -1,10 +1,8 @@
 package cloudwalk.master.server;
-
 import cloudwalk.master.server.entity.SlaveInfoEntity;
 import cloudwalk.master.server.entity.SlaveNameEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +26,8 @@ public final class SlaveManager {
     public static void registerSlave(SlaveNameEntity slaveNameEntity) {
         if (slaveTable.containsKey(slaveNameEntity)) {
             LOGGER.warn("Slave with " + slaveNameEntity.getSlaveName() + " has already registered");
-        } else {
+        } 
+        else {
             slaveTable.put(slaveNameEntity, new SlaveInfoEntity());
         }
     }
@@ -38,6 +37,7 @@ public final class SlaveManager {
         for (SlaveNameEntity entity : slaveTable.keySet()) {
             nameList.add(entity.getSlaveName());
         }
+
         return nameList;
     }
 }
