@@ -86,7 +86,6 @@ public class CrawlController extends Configurable {
     scheduler = new Scheduler(server, "crawler_queue", "crawler_dupefilter", "crawler_counter", config);
     this.pageFetcher = pageFetcher;
     this.robotstxtServer = robotstxtServer;
-
     finished = false;
     shuttingDown = false;
   }
@@ -332,7 +331,6 @@ public class CrawlController extends Configurable {
   public boolean isShuttingDown() {
     return shuttingDown;
   }
-
   /**
    * Set the current crawling session set to 'shutdown'. Crawler threads
    * monitor the shutdown flag and when it is set to true, they will no longer

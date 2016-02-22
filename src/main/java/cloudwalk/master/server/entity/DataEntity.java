@@ -4,6 +4,7 @@ package cloudwalk.master.server.entity;
  * Created by apple on 2/18/16.
  * Data needed by master
  */
+
 public class DataEntity {
     private String uri = null;
     private String description = null;

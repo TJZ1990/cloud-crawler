@@ -13,6 +13,7 @@ import java.util.List;
  * Created by 1333907 on 2/18/16.
  * Master manages slaves.
  */
+
 public final class SlaveManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(SlaveManager.class);
 

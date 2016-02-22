@@ -1,9 +1,9 @@
-# cloud-crawler
+## cloud-crawler
 
 **cloud-crawler** is a simple web crawler designed to be deployed on cloud servers. 
 > see project group @ [https://team.oschina.net/cloudwalk](https://team.oschina.net/cloudwalk "workgroup page")
 
-## Basic structure
+### Basic structure
 In current design, the cloud-crawler has one master-node and multiple slave-nodes which would all be deployed on cloud servers(such as [AWS](http://aws.amazon.com/) and [AliYun](https://www.aliyun.com)).
 
 The graph below shows a sketch of the basic project structure, note that the structure may be modified if we find it not applicable or a better design comes out.
@@ -15,8 +15,8 @@ The graph below shows a sketch of the basic project structure, note that the str
 - The crawler on slave-nodes uses a few modules from the [crawler4j](https://github.com/yasserg/crawler4j) project on github, with its controller and database access changed in order to work as part of the distributed system. A communication module is implemented so that the crawlers can link up with the coordinator on the master-node.
 - There are FTP servers on slave-nodes so that the user may get the crawling products(the pages crawled will be processed on local slave-node, and if there are any processing results, they will be pushed to the FTP server waiting for download).
 
-## Brief deployment guide(On Linux server)
-### Normal way
+### Brief deployment guide(On Linux server)
+#### Normal way
 
 See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master/deployment/full-deployment-report.md).
 - Set up FTP service so that file can be transferred.
@@ -27,11 +27,11 @@ See complete version [here](https://github.com/TJZ1990/cloud-crawler/blob/master
 `$ chmod +x cloud-crawler.sh`  
 `$ ./cloud-crawler.sh -m 或 cloud-crawler.sh -s 或 ./cloud-crawler.sh -s IP PORT CODE`  
 
-### Using docker(NOT AVAILABLE YET)
+#### Using docker(NOT AVAILABLE YET)
 - Get docker image at [release](https://github.com/TJZ1990/cloud-crawler/releases) page.
 - Deploy.
 
-## Optional objectives
+### Optional objectives
 These following features might be implemented if possible:
 - Create a [docker](http://www.docker.com/) image containing the environment of slave-node for fast deployment and extension.
 - ~~Use web pages to show the current status and progress of the crawlers.~~√
