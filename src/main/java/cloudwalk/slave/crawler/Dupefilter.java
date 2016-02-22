@@ -1,5 +1,4 @@
 package cloudwalk.slave.crawler;
-
 import edu.uci.ics.crawler4j.url.URLCanonicalizer;
 import edu.uci.ics.crawler4j.url.WebURL;
 import redis.clients.jedis.Jedis;

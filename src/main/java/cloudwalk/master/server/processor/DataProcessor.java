@@ -1,5 +1,4 @@
 package cloudwalk.master.server.processor;
-
 import cloudwalk.master.server.entity.DataEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,12 +7,11 @@ import org.slf4j.LoggerFactory;
  * Created by apple on 2/18/16.
  * A util class to process data.
  */
+
 public final class DataProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataProcessor.class);
-
     public static DataEntity process(String data) {
         DataEntity dataEntity = new DataEntity();
-
         String[] strings = data.split("&");
         for (String string : strings) {
             String[] twoStrings = string.split("=");
@@ -29,7 +27,6 @@ public final class DataProcessor {
                 dataEntity.setDescription(value);
             }
         }
-
         LOGGER.info("Generate an entity whose uri is " + dataEntity.getUri() + " and description is " + dataEntity.getDescription());
         return dataEntity;
     }

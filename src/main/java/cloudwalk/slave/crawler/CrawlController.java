@@ -14,10 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cloudwalk.slave.crawler;
-
-
 import redis.clients.jedis.Jedis;
 import edu.uci.ics.crawler4j.crawler.Configurable;
 import edu.uci.ics.crawler4j.crawler.CrawlConfig;
@@ -25,10 +22,8 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 import edu.uci.ics.crawler4j.url.URLCanonicalizer;
 import edu.uci.ics.crawler4j.url.WebURL;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,13 +59,10 @@ public class CrawlController extends Configurable {
    * flag and when it is set they will no longer process new pages.
    */
   protected boolean shuttingDown;
-
   protected PageFetcher pageFetcher;
   protected RobotstxtServer robotstxtServer;
   protected Scheduler scheduler;
-  
   protected Jedis server;
-
   protected final Object waitingLock = new Object();
 
   public CrawlController(CrawlConfig config, PageFetcher pageFetcher, RobotstxtServer robotstxtServer, String ip, int port, String pwd) throws Exception {
@@ -124,7 +116,6 @@ public class CrawlController extends Configurable {
       crawlersLocalData.clear();
       final List<Thread> threads = new ArrayList<>();
       final List<T> crawlers = new ArrayList<>();
-
       for (int i = 1; i <= numberOfCrawlers; i++) {
         T crawler = _c.newInstance();
         Thread thread = new Thread(crawler, "Crawler " + i);
@@ -220,9 +211,7 @@ public class CrawlController extends Configurable {
           }
         }
       });
-
       monitorThread.start();
-
       if (isBlocking) {
         waitUntilFinish();
       }
@@ -235,6 +224,7 @@ public class CrawlController extends Configurable {
   /**
    * Wait until this crawling session finishes.
    */
+
   public void waitUntilFinish() {
     while (!finished) {
       synchronized (waitingLock) {
@@ -256,6 +246,7 @@ public class CrawlController extends Configurable {
    *
    * @return List of Objects which are your local data
    */
+
   public List<Object> getCrawlersLocalData() {
     return crawlersLocalData;
   }
@@ -275,6 +266,7 @@ public class CrawlController extends Configurable {
    * @param pageUrl
    *            the URL of the seed
    */
+
   public void addSeed(String pageUrl) {
     String canonicalUrl = URLCanonicalizer.getCanonicalURL(pageUrl);
     if (canonicalUrl == null) {
@@ -336,6 +328,7 @@ public class CrawlController extends Configurable {
    * monitor the shutdown flag and when it is set to true, they will no longer
    * process new pages.
    */
+  
   public void shutdown() {
     logger.info("Shutting down...");
     this.shuttingDown = true;
