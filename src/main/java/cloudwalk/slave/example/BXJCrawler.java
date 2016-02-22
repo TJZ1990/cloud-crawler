@@ -31,15 +31,19 @@ public class BXJCrawler extends WebCrawler {
     @Override
     public void visit(Page page) {
         String url = page.getWebURL().getURL();
+
         if (page.getParseData() instanceof HtmlParseData) {
+
             if (url.toLowerCase().matches(curPattern1)) {
                 HtmlParseData htmlParseData = (HtmlParseData) page
                         .getParseData();
                 String text = htmlParseData.getText();
                 Pattern p = Pattern.compile("\\d+回复/(\\d+)亮 \\d+浏览");
                 Matcher m = p.matcher(text);
+
                 if(m.find()) {
                     int num = Integer.valueOf(m.group(1));
+                    
                     if(num >= 5){
                         System.out.println(num + "亮贴 " + url + " " + htmlParseData.getTitle());
                     }
