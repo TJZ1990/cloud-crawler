@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
  * Created by 1333907 on 2/19/16.
  * Handler for index.html.
  */
+
 public class IndexHandler implements HttpHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexHandler.class);
 
