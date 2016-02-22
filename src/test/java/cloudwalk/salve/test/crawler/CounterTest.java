@@ -15,7 +15,7 @@ public class CounterTest {
     @Before
     public void setUp() throws Exception {
         server = new Jedis("localhost");
-        counter = new Counter(server);
+        counter = new Counter(server, "counter_test");
     }
 
     @After

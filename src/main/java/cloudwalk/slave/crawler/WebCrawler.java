@@ -262,9 +262,9 @@ public class WebCrawler implements Runnable {
     public void run() {
         onStart();
         while (true) {
-            List<WebURL> assignedURLs = new ArrayList<>(50);
+            List<WebURL> assignedURLs = new ArrayList<>(20);
             isWaitingForNewURLs = true;
-            scheduler.getNextURLs(50, assignedURLs);
+            scheduler.getNextURLs(20, assignedURLs);
             if (assignedURLs.size() == 0) {
                 if (scheduler.isFinished()) {
                     return;
@@ -428,11 +428,7 @@ public class WebCrawler implements Runnable {
                     }
 
                 }
-                logger.trace("frotier has {} tasks", scheduler.getQueueLength());
-                logger.trace("schedule {} new links", toSchedule.size());
                 scheduler.scheduleAll(toSchedule);
-                logger.trace("frotier now has {} tasks", scheduler.getQueueLength());
-
                 visit(page);
             }
         } catch (PageBiggerThanMaxSizeException e) {
