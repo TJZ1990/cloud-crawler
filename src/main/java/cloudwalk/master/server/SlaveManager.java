@@ -21,6 +21,7 @@ public final class SlaveManager {
      * Is a singleton class with private constructor.
      */
     private SlaveManager() {
+        
     }
 
     public static void registerSlave(SlaveNameEntity slaveNameEntity) {
