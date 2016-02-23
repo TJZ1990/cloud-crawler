@@ -46,6 +46,10 @@ public final class SimpleHttpServer {
             LOGGER.error("Cannot start simple HTTP server");
             return null;
         }
+
+        /**
+         * Handlers.
+         */
         // Handler for index.html
         httpServer.createContext("/index", new IndexHandler());
         // Handler for static files, e.g., css, js
@@ -54,6 +58,13 @@ public final class SimpleHttpServer {
         httpServer.createContext("/message", new MessageHandler());
         // Handler for slave register
         httpServer.createContext("/register", new RegisterHandler());
+        // Handler for slave.json
+        httpServer.createContext("/slave.json", new SlaveHandler());
+        // Handler for slaves.json
+        httpServer.createContext("/slaves.json", new SlaveHandler());
+        // Handler for number.json
+        httpServer.createContext("/number.json", new SlaveHandler());
+
         httpServer.setExecutor(null);
         httpServer.start();
         LOGGER.info("Simple HTTP server started");
