@@ -1,5 +1,4 @@
 package cloudwalk.master.server.processor;
-
 import cloudwalk.master.server.SlaveManager;
 import cloudwalk.master.server.entity.SlaveNameEntity;
 import org.slf4j.Logger;
@@ -9,12 +8,11 @@ import org.slf4j.LoggerFactory;
  * Created by apple on 2/18/16.
  * Processor for register.
  */
+
 public class RegisterProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterProcessor.class);
-
     public static void process(String data) {
         SlaveNameEntity entity = new SlaveNameEntity();
-
         String[] strings = data.split("&");
         for (String string : strings) {
             String[] twoStrings = string.split("=");
