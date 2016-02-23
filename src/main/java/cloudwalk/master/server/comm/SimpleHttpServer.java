@@ -12,6 +12,7 @@ import java.net.InetSocketAddress;
  * Created by 1333907 on 2/18/16.
  * Simple master HTTP server starts from command line instead of container.
  */
+
 public final class SimpleHttpServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleHttpServer.class);
     private static final int MULTI = 1;

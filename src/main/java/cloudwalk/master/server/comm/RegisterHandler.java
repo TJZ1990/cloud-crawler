@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
  * Created by 1333907 on 2/18/16.
  * Handler for slave register.
  */
+
 public class RegisterHandler implements HttpHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterHandler.class);
 

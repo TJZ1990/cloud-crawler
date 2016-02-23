@@ -4,6 +4,7 @@ package cloudwalk.master.server.entity;
  * Created by 1333907 on 2/18/16.
  * Entity for slaves.
  */
+
 public class SlaveNameEntity {
     private String ip = null;
     private int port = -1;

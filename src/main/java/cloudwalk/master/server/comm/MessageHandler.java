@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
  * Created by 1333907 on 2/18/16.
  * Handler for SimpleHttpServer.
  */
+
 public class MessageHandler implements HttpHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageHandler.class);
 
