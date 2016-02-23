@@ -10,19 +10,19 @@ public class Counter {
         this.server = server;
         this.counterKey = counterKey;
     }
-    
+
     public void incr() {
         server.incr(counterKey);
     }
-    
+
     public long getNumber() {
         String result = server.get(counterKey);
-        if(result == null){
+        if (result == null) {
             return 0;
         }
         return Long.parseLong(result);
     }
-    
+
     public void clear() {
         server.set(counterKey, "0");
     }

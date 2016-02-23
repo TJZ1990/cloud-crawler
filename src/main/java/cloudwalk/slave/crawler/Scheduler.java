@@ -23,8 +23,8 @@ public class Scheduler extends Configurable {
 
     protected boolean isFinished = false;
 
-    public Scheduler(Jedis server, String queueKey, String dupefilterKey, String counterKey,
-            CrawlConfig config) {
+    public Scheduler(Jedis server, String queueKey, String dupefilterKey,
+            String counterKey, CrawlConfig config) {
         super(config);
         this.server = server;
         this.queue = new PriorityQueue(server, queueKey);
@@ -65,7 +65,7 @@ public class Scheduler extends Configurable {
             WebURL url;
             while (!isFinished && num < max) {
                 url = queue.pop();
-                if(url == null) {
+                if (url == null) {
                     return;
                 }
                 result.add(url);

@@ -17,20 +17,20 @@ public class Queue {
         this.server = server;
         this.queueKey = queueKey;
     }
-    
+
     public void push(WebURL url) {
         server.lpush(queueKey.getBytes(), serialize(url));
     }
-    
+
     public WebURL pop() {
         return unserialize(server.rpop(queueKey.getBytes()));
 
     }
-    
+
     public long getLength() {
         return server.llen(queueKey);
     }
-    
+
     public void clear() {
         server.del(queueKey);
     }
@@ -52,7 +52,7 @@ public class Queue {
     }
 
     public WebURL unserialize(byte[] bytes) {
-        if(bytes == null) {
+        if (bytes == null) {
             return null;
         }
         ByteArrayInputStream bais = null;

@@ -19,27 +19,28 @@ public class PriorityQueue {
         this.server = server;
         this.queueKey = queueKey;
     }
-    
+
     public void push(WebURL url) {
         // URL priority is not used now.
         short score = url.getDepth();
         server.zadd(queueKey.getBytes(), score, serialize(url));
     }
-    
+
     @SuppressWarnings("unchecked")
     public WebURL pop() {
         Transaction tx = server.multi();
         tx.zrange(queueKey.getBytes(), 0, 0);
         tx.zremrangeByRank(queueKey, 0, 0);
         Set<byte[]> result = (Set<byte[]>) tx.exec().get(0);
-        if(result.size() == 0) return null;
+        if (result.size() == 0)
+            return null;
         return unserialize(result.iterator().next());
     }
-    
+
     public long getLength() {
         return server.zcard(queueKey);
     }
-    
+
     public void clear() {
         server.del(queueKey);
     }
@@ -61,7 +62,7 @@ public class PriorityQueue {
     }
 
     public WebURL unserialize(byte[] bytes) {
-        if(bytes == null) {
+        if (bytes == null) {
             return null;
         }
         ByteArrayInputStream bais = null;
