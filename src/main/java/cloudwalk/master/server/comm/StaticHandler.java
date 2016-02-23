@@ -1,5 +1,7 @@
 package cloudwalk.master.server.comm;
 
+import cloudwalk.master.server.comm.util.StringFileReader;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.slf4j.Logger;
@@ -20,20 +22,18 @@ public class StaticHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         LOGGER.info("Request through StaticHandler");
         String staticFile = httpExchange.getRequestURI().toString();
+        if (staticFile.startsWith("/static")) {
+            staticFile = staticFile.substring(7);
+        }
         LOGGER.info("Get request for " + staticFile);
-        File file = new File("./src/main/" + staticFile);
-        if (!file.exists()) {
-            LOGGER.error("File does not exist");
+        String filePath = "../cloud-crawler-front-end/" + staticFile;
+        String index = StringFileReader.read(filePath);
+        if (staticFile.endsWith(".css")) {
+            httpExchange.getResponseHeaders().set("Content-Type", "text/css");
         }
-        BufferedReader input = new BufferedReader(new FileReader(file));
-        StringBuilder index = new StringBuilder();
-        String string;
-        while ((string = input.readLine()) != null) {
-            index.append(string);
-        }
-        httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, index.toString().getBytes().length);
+        httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, index.getBytes().length);
         OutputStream out = httpExchange.getResponseBody();
-        out.write(index.toString().getBytes());
+        out.write(index.getBytes());
         out.flush();
         httpExchange.close();
     }
