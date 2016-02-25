@@ -41,11 +41,12 @@ public class BXJCrawler extends WebCrawler {
                 Pattern p = Pattern.compile("\\d+回复/(\\d+)亮 \\d+浏览");
                 Matcher m = p.matcher(text);
 
-                if(m.find()) {
+                if (m.find()) {
                     int num = Integer.valueOf(m.group(1));
-                    
-                    if(num >= 5){
-                        System.out.println(num + "亮贴 " + url + " " + htmlParseData.getTitle());
+
+                    if (num >= 5) {
+                        System.out.println(num + "亮贴 " + url + " "
+                                + htmlParseData.getTitle());
                     }
                 }
             }
