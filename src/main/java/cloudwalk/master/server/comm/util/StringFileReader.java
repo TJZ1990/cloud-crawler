@@ -18,7 +18,7 @@ public final class StringFileReader {
     public static String read(String filePath) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
-            LOGGER.error("File does not exist");
+            LOGGER.error("File does not exist: " + filePath);
         }
         BufferedReader input = new BufferedReader(new FileReader(file));
         StringBuilder index = new StringBuilder();
