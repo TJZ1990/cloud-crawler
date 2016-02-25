@@ -6,15 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by 1333907 on 2/18/16.
- * Processor for register.
+ * Created by 1333907 on 2/23/16.
+ * Update slaves.
  */
-
-public class RegisterProcessor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterProcessor.class);
+public class UpdateProcessor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateProcessor.class);
 
     public static void process(String data) {
         SlaveEntity entity = new SlaveEntity();
+        long number = 0L;
 
         String[] strings = data.split("&");
         for (String string : strings) {
@@ -31,19 +31,17 @@ public class RegisterProcessor {
                 entity.setIp(value);
             }
             if ("port".equals(key)) {
-                int port = -1;
-                try {
-                    port = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
+                int port = Integer.parseInt(value);
                 entity.setPort(port);
             }
             if ("name".equals(key)) {
                 entity.setName(value);
             }
+            if ("number".equals(key)) {
+                number = Long.parseLong(value);
+            }
         }
 
-        SlaveManager.registerSlave(entity);
+        SlaveManager.updateSlave(entity, number);
     }
 }

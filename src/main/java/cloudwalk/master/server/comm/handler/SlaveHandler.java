@@ -1,8 +1,9 @@
-package cloudwalk.master.server.comm;
+package cloudwalk.master.server.comm.handler;
 
-import cloudwalk.master.server.comm.util.StringFileReader;
+import cloudwalk.master.server.SlaveManager;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import net.sf.json.JSONObject;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,32 +17,35 @@ public class SlaveHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String info = httpExchange.getRequestURI().toString();
-        String filePath = "../cloud-crawler-front-end/server/json" + info;
-        String index = StringFileReader.read(filePath);
+        if ("/slaves.json".equals(info)) {
+            handleSlaves(httpExchange);
+        }
         if ("/number.json".equals(info)) {
-            handleNumber(httpExchange, index);
-        } else {
-            handleSlave(httpExchange, index);
+            handleNumber(httpExchange);
         }
         httpExchange.close();
     }
 
-    public void handleSlave(HttpExchange httpExchange, String index) throws IOException {
-        httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, index.getBytes().length);
+    public void handleSlaves(HttpExchange httpExchange) throws IOException {
+        JSONObject slaves = SlaveManager.getSlaves();
+        String slavesString = slaves.toString();
+        httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, slavesString.getBytes().length);
         OutputStream out = httpExchange.getResponseBody();
-        out.write(index.getBytes());
+        out.write(slavesString.getBytes());
         out.flush();
     }
 
-    public void handleNumber(HttpExchange httpExchange, String index) throws IOException {
+    public void handleNumber(HttpExchange httpExchange) throws IOException {
+        JSONObject number = SlaveManager.getNumber();
+        String numberString = number.toString();
         httpExchange.getResponseHeaders().set("Content-Type", "text/event-stream");
         httpExchange.getResponseHeaders().set("Cache-Control", "no-cache");
         httpExchange.getResponseHeaders().set("Connection", "keep-alive");
-        index = "data:" + index.replaceAll("\n", "") + "\n\n";
-        httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, index.getBytes().length);
+        numberString = "data:" + numberString.replaceAll("\n", "") + "\n\n";
+        httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, numberString.getBytes().length);
         OutputStream out = httpExchange.getResponseBody();
         while (true) {
-            out.write(index.getBytes());
+            out.write(numberString.getBytes());
             out.flush();
             try {
                 Thread.sleep(1000);

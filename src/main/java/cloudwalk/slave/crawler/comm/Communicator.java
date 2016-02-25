@@ -32,21 +32,15 @@ public final class Communicator {
         suffix = "post";
     }
 
-    public static void register(String slaveIp, int slavePort, String slaveName) {
+    public static void register(String slaveHostname, String slaveIp, int slavePort, String slaveName) {
         String destination = protocol + "://" + address + ":" + port + "/register/";
-        String param = "ip=" + slaveIp + "&port=" + slavePort + "&name=" + slaveName;
+        String param = "hostname=" + slaveHostname + "&ip=" + slaveIp + "&port=" + slavePort + "&name=" + slaveName;
         sendPost(destination, param);
     }
 
-    public static void sendMessage(String uri) {
-        sendMessage(uri, null);
-    }
-
-    public static void sendMessage(String uri, String description) {
-        LOGGER.info("To send a URI information into master: " + uri + " (" + description + ")");
-        String destination = protocol + "://" + address + ":" + port + "/" + suffix + "/";
-        String param = "uri=" + uri + "&description=" + description;
-        LOGGER.info("Post request will be send into " + destination + " and it has " + param);
+    public static void sendMessage(String slaveHostname, String slaveIp, int slavePort, String slaveName, long number) {
+        String destination = protocol + "://" + address + ":" + port + "/message/";
+        String param = "hostname=" + slaveHostname + "&ip=" + slaveIp + "&port=" + slavePort + "&name=" + slaveName + "&number=" + number;
         sendPost(destination, param);
     }
 

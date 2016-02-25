@@ -1,5 +1,6 @@
 package cloudwalk.master.server.comm;
 
+import cloudwalk.master.server.comm.handler.*;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.spi.HttpServerProvider;
 import org.slf4j.Logger;
@@ -13,29 +14,29 @@ import java.net.InetSocketAddress;
  * Simple master HTTP server starts from command line instead of container.
  */
 
-public final class SimpleHttpServer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleHttpServer.class);
+public final class SimpleMasterHttpServer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMasterHttpServer.class);
     private static final int MULTI = 1;
 
     HttpServerProvider httpServerProvider = null;
     InetSocketAddress inetSocketAddress = null;
     private int port = 8080;
 
-    public SimpleHttpServer() {
+    public SimpleMasterHttpServer() {
         this(8080);
     }
 
-    public SimpleHttpServer(int port) {
+    public SimpleMasterHttpServer(int port) {
         this.port = port;
     }
 
-    public SimpleHttpServer init() {
+    public SimpleMasterHttpServer init() {
         httpServerProvider = HttpServerProvider.provider();
         inetSocketAddress = new InetSocketAddress(port);
         return this;
     }
 
-    public SimpleHttpServer start() {
+    public SimpleMasterHttpServer start() {
         HttpServer httpServer = null;
         try {
             httpServer = httpServerProvider.createHttpServer(inetSocketAddress, MULTI);
