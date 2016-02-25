@@ -1,4 +1,4 @@
-package cloudwalk.master.server.comm;
+package cloudwalk.master.server.comm.handler;
 
 import cloudwalk.master.server.comm.util.StringFileReader;
 import com.sun.net.httpserver.HttpExchange;
